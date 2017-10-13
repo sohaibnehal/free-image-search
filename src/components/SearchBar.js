@@ -16,10 +16,10 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <div className="SearchBar">
-                <input placeholder="Enter Search Key" type="text" ref="searchKey" className="search-box"/>
+            <div className='SearchBar'>
+                <input placeholder='Enter Search Key' type='text' ref='searchKey' className='search-box'/>
                 <br />
-                <button onClick={this.handleFetchImages} className="search-button">Search</button>
+                <button onClick={this.handleFetchImages} className='search-button'>Search</button>
             </div>
         );
     }

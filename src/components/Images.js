@@ -18,7 +18,7 @@ class Images extends Component {
             });
         }
         return (
-            <div className="Images text-center">
+            <div className='Images text-center'>
                 {imageItems}
             </div>
         );

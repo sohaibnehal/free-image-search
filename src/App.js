@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import Unsplash , { toJson } from 'unsplash-js';
 
@@ -22,7 +21,7 @@ class App extends Component {
                 pageRangeDisplayed: 5
             },
             searchKey: '',
-            displayLoader : false
+            displayLoader: false
         };
         this.handleFetchImagesFromSplash = this.handleFetchImagesFromSplash.bind(this);
         this.handleSearchSplash = this.handleSearchSplash.bind(this);
@@ -32,67 +31,72 @@ class App extends Component {
     //Event Handler for fetching images by search key. It is being called from SearchBar component
     handleFetchImagesFromSplash() {
 
-        this.setState({
+        //Displaying loader
+        this.setState((prevState) => {
+            return {
                 displayLoader: true
-            },
-            function () {
-            });
-
-        const unsplash = new Unsplash({
-            applicationId: "*****************************",
-            secret: "***********************",
-            callbackUrl: "http://localhost:3000"
+            }
         });
 
+        //Configs for Unsplash
+        const unsplash = new Unsplash({
+            applicationId: '*****************',
+            secret: '*****************',
+            callbackUrl: 'http://localhost:3000'
+        });
 
-        unsplash.search.photos( this.state.searchKey, this.state.pagination.activePage )
+        //hitting unsplash API
+        unsplash.search.photos(this.state.searchKey, this.state.pagination.activePage)
             .then(toJson)
             .then(response => {
-                // Your code
-                console.log(response);
-
                 let _pagination = this.state.pagination;
                 _pagination['totalItemsCount'] = response.total;
 
-                this.setState({
-                    images: response.results,
-                    pagination : _pagination,
-                    displayLoader: false
-                    },
-                    function () {
-                    });
+                //Setting response in state
+                this.setState((prevState) => {
+                    return {
+                        images: response.results,
+                        pagination: _pagination,
+                        displayLoader: false
+                    }
+                });
             });
     };
 
 
-    handleSearchSplash(searchKey){
+    //This function handles any new search
+    handleSearchSplash(searchKey) {
         let _pagination = this.state.pagination;
         _pagination['activePage'] = 1;
-
-        this.setState({
-                searchKey : searchKey,
+        this.setState((prevState) => {
+            return {
+                searchKey: searchKey,
                 pagination: _pagination
-            },
-            function () {
-                this.handleFetchImagesFromSplash();
-            });
+            }
+        }, () => {
+            this.handleFetchImagesFromSplash();
+        });
     }
 
-
-    handlePageChange(pageNumber){
+    //This function handles any page change
+    handlePageChange(pageNumber) {
         let _pagination = this.state.pagination;
         _pagination['activePage'] = pageNumber;
-
-        this.setState({pagination: _pagination});
+        this.setState((prevState) => {
+            return {
+                pagination: _pagination
+            }
+        });
         this.handleFetchImagesFromSplash();
     }
 
+    //Rendering the component
     render() {
         return (
-            <div className="App">
+            <div className='App'>
                 <Header />
-                <SearchBar searchSplash={this.handleSearchSplash} />
-                <Images images={this.state.images} />
+                <SearchBar searchSplash={this.handleSearchSplash}/>
+                <Images images={this.state.images}/>
                 {
                     this.state.displayLoader ? <Loader /> : null
                 }
@@ -105,9 +109,9 @@ class App extends Component {
 
 //Expected type of property
 App.propTypes = {
-    handleFetchImagesFromSplash:  React.PropTypes.func,
-    handleSearchSplash:  React.PropTypes.func,
-    handlePageChange:  React.PropTypes.func
+    handleFetchImagesFromSplash: React.PropTypes.func,
+    handleSearchSplash: React.PropTypes.func,
+    handlePageChange: React.PropTypes.func
 };
 
 export default App;

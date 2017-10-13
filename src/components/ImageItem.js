@@ -9,7 +9,7 @@ class ImageItem extends Component {
 
     render() {
         return (
-            <img className="image" src={this.props.src}/>
+            <img className='image' src={this.props.src}/>
         );
     }
 }
