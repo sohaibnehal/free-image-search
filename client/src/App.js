@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Unsplash , { toJson } from 'unsplash-js';
+import UnsplashDataFactory from './services/UnsplashDataFactory';
 
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
@@ -27,6 +28,11 @@ class App extends Component {
         this.handleSearchSplash = this.handleSearchSplash.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
     }
+
+    async componentDidMount() {
+        const res = await UnsplashDataFactory.init();
+    }
+
 
     //Event Handler for fetching images by search key. It is being called from SearchBar component
     handleFetchImagesFromSplash() {
@@ -62,7 +68,6 @@ class App extends Component {
                 });
             });
     };
-
 
     //This function handles any new search
     handleSearchSplash(searchKey) {
