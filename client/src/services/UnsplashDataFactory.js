@@ -1,12 +1,11 @@
-import Unsplash , { toJson } from 'unsplash-js';
-
-exports.init = () =>
-{
-    fetch('/api/v1/UnsplashConfigs')
-        .then(response => {
-            console.log(response)
-        })
-        .catch(e => {
-           console.log(e);
-        });
+const UnsplashDataFactory = {
+    init() {
+        return fetch('/api/v1/UnsplashConfigs')
+            .then(response => response.json())
+            .catch(e => {
+                console.log(e);
+            });
+    }
 };
+
+export default UnsplashDataFactory;

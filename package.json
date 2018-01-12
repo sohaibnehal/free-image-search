@@ -2,7 +2,7 @@
   "name": "free-image-search",
   "version": "1.0.0",
   "engines": {
-    "node": "6.11.x"
+    "node": "8.9.1"
   },
   "scripts": {
     "start": "node server",

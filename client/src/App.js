@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Unsplash , { toJson } from 'unsplash-js';
-import UnsplashDataFactory from './services/UnsplashDataFactory';
+import  UnsplashDataFactory  from './services/UnsplashDataFactory';
 
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
@@ -22,6 +22,7 @@ class App extends Component {
                 pageRangeDisplayed: 5
             },
             searchKey: '',
+            unsplashConfigs: {},
             displayLoader: false
         };
         this.handleFetchImagesFromSplash = this.handleFetchImagesFromSplash.bind(this);
@@ -29,10 +30,15 @@ class App extends Component {
         this.handlePageChange = this.handlePageChange.bind(this);
     }
 
-    async componentDidMount() {
-        const res = await UnsplashDataFactory.init();
+    async componentWillMount() {
+        try {
+            let unsplashConfigs = await UnsplashDataFactory.init();
+            unsplashConfigs['callbackUrl'] = 'http://localhost:3000';
+            this.setState({ unsplashConfigs });
+        } catch(e) {
+            console.log(e);
+        }
     }
-
 
     //Event Handler for fetching images by search key. It is being called from SearchBar component
     handleFetchImagesFromSplash() {
@@ -46,9 +52,9 @@ class App extends Component {
 
         //Configs for Unsplash
         const unsplash = new Unsplash({
-            applicationId: '*****************',
-            secret: '*****************',
-            callbackUrl: 'http://localhost:3000'
+            applicationId: this.state.unsplashConfigs.application_id,
+            secret: this.state.unsplashConfigs.application_id,
+            callbackUrl: this.state.unsplashConfigs.callbackUrl
         });
 
         //hitting unsplash API
@@ -102,7 +108,7 @@ class App extends Component {
                 <Header />
                 <SearchBar searchSplash={this.handleSearchSplash}/>
                 <Images images={this.state.images}/>
-                {
+                t{
                     this.state.displayLoader ? <Loader /> : null
                 }
                 <PaginationControl controls={this.state.pagination} changePage={this.handlePageChange}/>
