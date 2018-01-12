@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Unsplash , { toJson } from 'unsplash-js';
 import  UnsplashDataFactory  from './services/UnsplashDataFactory';
 
@@ -120,9 +121,9 @@ class App extends Component {
 
 //Expected type of property
 App.propTypes = {
-    handleFetchImagesFromSplash: React.PropTypes.func,
-    handleSearchSplash: React.PropTypes.func,
-    handlePageChange: React.PropTypes.func
+    handleFetchImagesFromSplash: PropTypes.func,
+    handleSearchSplash: PropTypes.func,
+    handlePageChange: PropTypes.func
 };
 
 export default App;

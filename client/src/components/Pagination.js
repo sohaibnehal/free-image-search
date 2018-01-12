@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 import '../style/bootstrap-3.3.7/dist/css/bootstrap.css';
 
@@ -33,7 +34,7 @@ class PaginationControl extends Component
 
 //Expected type of property
 PaginationControl.propTypes = {
-    handlePageChange:  React.PropTypes.func
+    handlePageChange:  PropTypes.func
 };
 
 export default PaginationControl;

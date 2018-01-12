@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import '../style/searchbar.css';
 
 class SearchBar extends Component {
@@ -27,7 +28,7 @@ class SearchBar extends Component {
 
 //Expected type of property
 SearchBar.propTypes = {
-    handleFetchImages:  React.PropTypes.func
+    handleFetchImages:  PropTypes.func
 };
 
 export default SearchBar;
