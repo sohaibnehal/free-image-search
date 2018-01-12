@@ -18,7 +18,7 @@ class PaginationControl extends Component
     render()
     {
         return (
-        <div className="text-center">
+        <div className='text-center'>
             <Pagination
                 activePage={this.props.controls.activePage}
                 itemsCountPerPage={this.props.controls.itemsCountPerPage}

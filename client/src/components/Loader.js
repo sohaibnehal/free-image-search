@@ -5,15 +5,10 @@ import spinner from '../images/spinner.gif'; // Tell Webpack this JS file uses t
 
 class Loader extends Component
 {
-    constructor(props)
-    {
-        super(props);
-    }
-
     render()
     {
         return (
-            <div className="text-center">
+            <div className='text-center'>
                 <img src={spinner} />
             </div>
         );

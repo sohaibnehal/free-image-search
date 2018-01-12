@@ -1,18 +1,19 @@
 {
   "name": "free-image-search",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-js-pagination": "^2.2.0",
-    "react-scripts": "1.0.13",
-    "unsplash-js": "^4.6.0"
+  "version": "1.0.0",
+  "engines": {
+    "node": "8.9.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "start": "node server",
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "react-ui/node_modules"
+  ],
+  "dependencies": {
+    "express": "^4.14.1"
+  },
+  "devDependencies": {}
 }
