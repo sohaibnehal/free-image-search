@@ -1,7 +1,6 @@
 
 exports.getUnsplashCredentials = () => {
     return {
-        application_id : process.env.APPLICATION_ID,
-        secret : process.env.SECRET
+        applicationId : process.env.UNSPLASH_APPLICATION_ID
     };
 };

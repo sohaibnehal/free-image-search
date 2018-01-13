@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Unsplash , { toJson } from 'unsplash-js';
-import  UnsplashDataFactory  from './services/UnsplashDataFactory';
 
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
@@ -23,22 +21,11 @@ class App extends Component {
                 pageRangeDisplayed: 5
             },
             searchKey: '',
-            unsplashConfigs: {},
             displayLoader: false
         };
         this.handleFetchImagesFromSplash = this.handleFetchImagesFromSplash.bind(this);
         this.handleSearchSplash = this.handleSearchSplash.bind(this);
         this.handlePageChange = this.handlePageChange.bind(this);
-    }
-
-    async componentWillMount() {
-        try {
-            let unsplashConfigs = await UnsplashDataFactory.init();
-            unsplashConfigs['callbackUrl'] = 'http://localhost:3000';
-            this.setState({ unsplashConfigs });
-        } catch(e) {
-            console.log(e);
-        }
     }
 
     //Event Handler for fetching images by search key. It is being called from SearchBar component
@@ -51,17 +38,17 @@ class App extends Component {
             }
         });
 
-        //Configs for Unsplash
-        const unsplash = new Unsplash({
-            applicationId: this.state.unsplashConfigs.application_id,
-            secret: this.state.unsplashConfigs.application_id,
-            callbackUrl: this.state.unsplashConfigs.callbackUrl
-        });
-
-        //hitting unsplash API
-        unsplash.search.photos(this.state.searchKey, this.state.pagination.activePage)
-            .then(toJson)
-            .then(response => {
+        let body = {searchKey: this.state.searchKey, activePage: this.state.pagination.activePage};
+        fetch('/api/v1/searchPhotos',
+            {
+                method: 'POST',
+                body:JSON.stringify(body),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            })
+            .then(res => res.json())
+            .then(response =>  {
                 let _pagination = this.state.pagination;
                 _pagination['totalItemsCount'] = response.total;
 
@@ -70,6 +57,14 @@ class App extends Component {
                     return {
                         images: response.results,
                         pagination: _pagination,
+                        displayLoader: false
+                    }
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                this.setState((prevState) => {
+                    return {
                         displayLoader: false
                     }
                 });
