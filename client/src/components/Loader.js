@@ -1,21 +1,12 @@
 
-import React, { Component } from 'react';
+import React  from 'react';
 import '../style/index.css';
 import spinner from '../images/spinner.gif'; // Tell Webpack this JS file uses this image
 
-class Loader extends Component
-{
-    render()
-    {
-        return (
-            <div className='text-center'>
-                <img src={spinner} />
-            </div>
-        );
-    }
-}
-
-//Expected type of property
-Loader.propTypes = {};
+const Loader = props => (
+    <div className='text-center'>
+        <img src={spinner} alt='Loading Spinner'/>
+    </div>
+);
 
 export default Loader;
