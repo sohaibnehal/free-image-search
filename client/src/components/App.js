@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Header from './components/Header';
-import SearchBar from './components/SearchBar';
-import Images from './components/Images';
-import PaginationControl from './components/Pagination';
-import Loader from './components/Loader';
+import Header from './Header';
+import SearchBar from './SearchBar';
+import Images from './Images';
+import PaginationControl from './Pagination';
+import Loader from './Loader';
 
 class App extends Component {
 
