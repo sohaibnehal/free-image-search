@@ -23,13 +23,10 @@ class App extends Component {
             searchKey: '',
             displayLoader: false
         };
-        this.handleFetchImagesFromSplash = this.handleFetchImagesFromSplash.bind(this);
-        this.handleSearchSplash = this.handleSearchSplash.bind(this);
-        this.handlePageChange = this.handlePageChange.bind(this);
     }
 
     //Event Handler for fetching images by search key. It is being called from SearchBar component
-    handleFetchImagesFromSplash() {
+    handleFetchImagesFromSplash = () => {
 
         //Displaying loader
         this.setState((prevState) => {
@@ -72,7 +69,7 @@ class App extends Component {
     };
 
     //This function handles any new search
-    handleSearchSplash(searchKey) {
+    handleSearchSplash = (searchKey) => {
         let _pagination = this.state.pagination;
         _pagination['activePage'] = 1;
         this.setState((prevState) => {
@@ -83,10 +80,10 @@ class App extends Component {
         }, () => {
             this.handleFetchImagesFromSplash();
         });
-    }
+    };
 
     //This function handles any page change
-    handlePageChange(pageNumber) {
+    handlePageChange = (pageNumber) => {
         let _pagination = this.state.pagination;
         _pagination['activePage'] = pageNumber;
         this.setState((prevState) => {
@@ -95,7 +92,7 @@ class App extends Component {
             }
         });
         this.handleFetchImagesFromSplash();
-    }
+    };
 
     //Rendering the component
     render() {
