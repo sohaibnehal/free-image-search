@@ -104,7 +104,7 @@ class App extends Component {
                 <Header />
                 <SearchBar searchSplash={this.handleSearchSplash}/>
                 <Images images={this.state.images}/>
-                t{
+                {
                     this.state.displayLoader ? <Loader /> : null
                 }
                 <PaginationControl controls={this.state.pagination} changePage={this.handlePageChange}/>
