@@ -8,11 +8,8 @@ import PaginationControl from './Pagination';
 import Loader from './Loader';
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state =
-        {
+    
+    state = {
             images: {},
             pagination: {
                 activePage: 0,
@@ -23,7 +20,6 @@ class App extends Component {
             searchKey: '',
             displayLoader: false
         };
-    }
 
     //Event Handler for fetching images by search key. It is being called from SearchBar component
     handleFetchImagesFromSplash = () => {
